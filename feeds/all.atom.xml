@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-10T12:10:00+05:30</updated><entry><title>Solving Apollo 1337 from San Diego CTF 2021</title><link href="/solving-apollo-1337-from-san-diego-ctf-2021.html" rel="alternate"></link><published>2021-05-10T12:10:00+05:30</published><updated>2021-05-10T12:10:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2021-05-10:/solving-apollo-1337-from-san-diego-ctf-2021.html</id><summary type="html">&lt;p&gt;CTF challenge all based on enumeration and troubleshooting.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The author note for this CTF challenge.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>securitytaters</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-07-27T21:10:00+05:30</updated><entry><title>Solving SaaS from ImaginaryCTF 2021</title><link href="/solving-saas-from-imaginaryctf-2021.html" rel="alternate"></link><published>2021-07-27T21:10:00+05:30</published><updated>2021-07-27T21:10:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2021-07-27:/solving-saas-from-imaginaryctf-2021.html</id><summary type="html">&lt;p&gt;CTF challenge based on sed linux utility.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The author note for this CTF challenge.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;Welcome to Sed as a Service! Now you can filter lorem ipsum to your heart&amp;#39;s desire!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Attachment(source code) is provided along with the challenge URL. After visiting the URL we see a page to provide inputs to sed utility as shown below. Putting in some random input as per the provided syntax will output contents of some file.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="landing" src="img/16.1.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="landing" src="img/16.2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Looking at the provided source code gives us some idea of how the input is processed. Lets go through the important parts of the code.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;render_template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;html&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render_template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;index.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;blacklist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;flag&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;|&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;amp;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;`&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/backend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;backend&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;query&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Stop hacking.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sed &lt;/span&gt;&lt;span class="si"&gt;{request.args[&amp;#39;query&amp;#39;]}&lt;/span&gt;&lt;span class="s2"&gt; stuff.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;On line 13 we see a route to &lt;strong&gt;backend&lt;/strong&gt; where our request gets sent. The code at line 16 than checks the &lt;strong&gt;blacklist&lt;/strong&gt; mentioned at line 11 against our input in variable &lt;strong&gt;query&lt;/strong&gt;.
+If any of the blacklisted words are found our input will be rejected. Otherwise line 18 processes the input and returns the output.&lt;/p&gt;
+&lt;p&gt;My first thought was to see if I can get the code to execute any commands of my own by bypassing the blacklist. So I searched around for some resources that could help in that direction. After trying a few things I realized that executing my command might be difficult than I thought considering the blacklisted special characters which allows for chaining commands.&lt;/p&gt;
+&lt;p&gt;It was time to check other avenues to break the code. Having used sed utility a few times I realized that it outputs the contents of the provided file by default to show the changes. So as long as we are able to use it on flag file we should be able to retrieve its contents. Now we needed to figure out how to bypass the word &lt;strong&gt;flag&lt;/strong&gt;. That was easy as most command injection bypass resources will highlight multiple methods to use common words in different ways. &lt;/p&gt;
+&lt;p&gt;For example linux command line will match &lt;strong&gt;fla?&lt;/strong&gt; as flat or flap, so on and so forth. ? will be replaced by any character available in the list of files in this case. With that all we had to do is provide the input similar to the below and that gave us the flag. Sometimes we just need to use the provided options instead of bypassing them ;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;'s/hello/hewwo/g' fl?g.txt&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="landing" src="img/16.3.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;That was a nice little chal from the Imaginary CTF team. Thanks to them. Feel free to ping me on twitter for feedback or queries.&lt;br /&gt;
+- 0xm4v3rick&lt;/p&gt;</content><category term="CTF"></category><category term="webappsec"></category><category term="writeup"></category><category term="linux"></category><category term="bypass"></category></entry><entry><title>Solving Apollo 1337 from San Diego CTF 2021</title><link href="/solving-apollo-1337-from-san-diego-ctf-2021.html" rel="alternate"></link><published>2021-05-10T12:10:00+05:30</published><updated>2021-05-10T12:10:00+05:30</updated><author><name>0xm4v3rick</name></author><id>tag:None,2021-05-10:/solving-apollo-1337-from-san-diego-ctf-2021.html</id><summary type="html">&lt;p&gt;CTF challenge all based on enumeration and troubleshooting.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The author note for this CTF challenge.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
